@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Patient - NeuroSport</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f7fb;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 12px;
+      background: #0f2742;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Add Patient</h1>
+
+<input id="name" placeholder="Patient Name">
+<select id="sport">
+  <option>Football</option>
+  <option>Soccer</option>
+  <option>Basketball</option>
+  <option>Track</option>
+</select>
+
+<input id="age" placeholder="Age">
+
+<button onclick="savePatient()">Save Patient</button>
+
+<script>
+function savePatient() {
+  const name = document.getElementById("name").value;
+  const sport = document.getElementById("sport").value;
+  const age = document.getElementById("age").value;
+
+  if (!name) {
+    alert("Enter name");
+    return;
+  }
+
+  let patients = JSON.parse(localStorage.getItem("patients")) || [];
+
+  patients.push({
+    name,
+    sport,
+    age
+  });
+
+  localStorage.setItem("patients", JSON.stringify(patients));
+
+  alert("Patient saved");
+
+  window.location.href = "provider.html";
+}
+</script>
+
+</body>
+</html>
