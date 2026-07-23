@@ -3,45 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>NeuroSport | Reports</title>
+  <title>NeuroSport Reports</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
     body {
       margin: 0;
+      font-family: Arial, sans-serif;
       background: #f4f7fb;
-      color: #172033;
+      color: #1c2430;
     }
 
     header {
       background: #0f2742;
       color: white;
-      padding: 20px 7%;
+      padding: 18px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    header a {
-      color: white;
-      text-decoration: none;
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
     }
 
     main {
-      padding: 40px 7%;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+      padding: 35px 7%;
     }
 
     h1 {
@@ -53,34 +40,36 @@
       margin-bottom: 30px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .report {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     }
 
-    th,
-    td {
-      padding: 14px;
-      text-align: left;
-      border-bottom: 1px solid #e4e7ec;
+    .report h2 {
+      margin-top: 0;
     }
 
-    th {
-      color: #475467;
+    .score {
+      font-size: 26px;
+      font-weight: bold;
+      color: #0f2742;
     }
 
-    .empty {
-      color: #667085;
-      padding: 20px 0;
+    .info {
+      margin: 7px 0;
     }
 
-    button {
+    .button {
+      display: inline-block;
+      margin-top: 18px;
       background: #0f2742;
       color: white;
-      border: none;
-      padding: 10px 16px;
+      padding: 11px 16px;
       border-radius: 8px;
-      cursor: pointer;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -88,84 +77,56 @@
 <body>
 
 <header>
-  <strong>NeuroSport</strong>
-
-  <a href="provider.html">
-    Back to Provider Dashboard
-  </a>
+  <div class="logo">NeuroSport</div>
+  <div>Patient Reports</div>
 </header>
 
 <main>
 
-  <h1>Patient Reports</h1>
+  <h1>Concussion Reports</h1>
+  <p class="subtitle">Recent athlete symptom check-ins and recovery information.</p>
 
-  <p class="subtitle">
-    Review concussion symptom check-ins and recovery information.
-  </p>
+  <div class="report">
+    <h2>Demo Athlete 1</h2>
 
-  <div class="card">
+    <p class="info"><strong>Sport:</strong> Football</p>
+    <p class="info"><strong>Concussion Date:</strong> July 18, 2026</p>
+    <p class="info"><strong>Latest Check-In:</strong> July 22, 2026</p>
 
-    <h2>Recent Check-Ins</h2>
+    <p>Symptom Score</p>
+    <div class="score">7 / 15</div>
 
-    <div id="reportArea"></div>
+    <p>
+      Headache: 3<br>
+      Dizziness: 2<br>
+      Concentration Difficulty: 2
+    </p>
 
+    <p><strong>Notes:</strong> Headache improved from yesterday. Mild dizziness remains.</p>
   </div>
 
+  <div class="report">
+    <h2>Demo Athlete 2</h2>
+
+    <p class="info"><strong>Sport:</strong> Soccer</p>
+    <p class="info"><strong>Concussion Date:</strong> July 15, 2026</p>
+    <p class="info"><strong>Latest Check-In:</strong> July 22, 2026</p>
+
+    <p>Symptom Score</p>
+    <div class="score">3 / 15</div>
+
+    <p>
+      Headache: 1<br>
+      Dizziness: 1<br>
+      Concentration Difficulty: 1
+    </p>
+
+    <p><strong>Notes:</strong> Symptoms continuing to improve.</p>
+  </div>
+
+  <a class="button" href="provider.html">Back to Provider Dashboard</a>
+
 </main>
-
-<script>
-
-  const reports =
-    JSON.parse(localStorage.getItem("reports")) || [];
-
-  const reportArea =
-    document.getElementById("reportArea");
-
-  if (reports.length === 0) {
-
-    reportArea.innerHTML =
-      '<p class="empty">No reports have been submitted yet.</p>';
-
-  } else {
-
-    let html = `
-      <table>
-
-        <thead>
-          <tr>
-            <th>Athlete</th>
-            <th>Sport</th>
-            <th>Symptom Score</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-
-        <tbody>
-    `;
-
-    reports.forEach(function(report) {
-
-      html += `
-        <tr>
-          <td>${report.athlete}</td>
-          <td>${report.sport}</td>
-          <td>${report.score}</td>
-          <td>${report.date}</td>
-        </tr>
-      `;
-
-    });
-
-    html += `
-        </tbody>
-      </table>
-    `;
-
-    reportArea.innerHTML = html;
-
-  }
-
-</script>
 
 </body>
 </html>
