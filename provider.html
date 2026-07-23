@@ -209,25 +209,7 @@
           </tr>
         </thead>
 
-        <tbody>
-          <tr>
-            <td>Demo Athlete 1</td>
-            <td>Football</td>
-            <td><span class="status">Active</span></td>
-          </tr>
-
-          <tr>
-            <td>Demo Athlete 2</td>
-            <td>Soccer</td>
-            <td><span class="status">Recovering</span></td>
-          </tr>
-
-          <tr>
-            <td>Demo Athlete 3</td>
-            <td>Basketball</td>
-            <td><span class="status">Cleared</span></td>
-          </tr>
-        </tbody>
+       <tbody id="patientTable"></tbody>
       </table>
 
     </section>
@@ -237,6 +219,21 @@
   <footer>
     NeuroSport prototype — use demo information only.
   </footer>
+<script>
+  const patients = JSON.parse(localStorage.getItem("patients")) || [];
+  const table = document.getElementById("patientTable");
 
+  patients.forEach(function(patient) {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${patient.name}</td>
+      <td>${patient.sport}</td>
+      <td><span class="status">Active</span></td>
+    `;
+
+    table.appendChild(row);
+  });
+</script>
 </body>
 </html>
