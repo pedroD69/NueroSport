@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NeuroSport | Reports</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #0f2742;
+      color: white;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 40px 7%;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #667085;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #e4e7ec;
+    }
+
+    th {
+      color: #475467;
+    }
+
+    .empty {
+      color: #667085;
+      padding: 20px 0;
+    }
+
+    button {
+      background: #0f2742;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <strong>NeuroSport</strong>
+
+  <a href="provider.html">
+    Back to Provider Dashboard
+  </a>
+</header>
+
+<main>
+
+  <h1>Patient Reports</h1>
+
+  <p class="subtitle">
+    Review concussion symptom check-ins and recovery information.
+  </p>
+
+  <div class="card">
+
+    <h2>Recent Check-Ins</h2>
+
+    <div id="reportArea"></div>
+
+  </div>
+
+</main>
+
+<script>
+
+  const reports =
+    JSON.parse(localStorage.getItem("reports")) || [];
+
+  const reportArea =
+    document.getElementById("reportArea");
+
+  if (reports.length === 0) {
+
+    reportArea.innerHTML =
+      '<p class="empty">No reports have been submitted yet.</p>';
+
+  } else {
+
+    let html = `
+      <table>
+
+        <thead>
+          <tr>
+            <th>Athlete</th>
+            <th>Sport</th>
+            <th>Symptom Score</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+    `;
+
+    reports.forEach(function(report) {
+
+      html += `
+        <tr>
+          <td>${report.athlete}</td>
+          <td>${report.sport}</td>
+          <td>${report.score}</td>
+          <td>${report.date}</td>
+        </tr>
+      `;
+
+    });
+
+    html += `
+        </tbody>
+      </table>
+    `;
+
+    reportArea.innerHTML = html;
+
+  }
+
+</script>
+
+</body>
+</html>
